@@ -1,10 +1,10 @@
 class Dino {
   constructor(ctx) {
     this.ctx = ctx;
-    this.tick = 0;
+    this.drawCount = 0;
 
     this.x = 50;
-    this.y = 360;
+    this.y = 290;
     this.y0 = this.y;
 
     this.w = 50;
@@ -21,11 +21,25 @@ class Dino {
     this.jumping = false;
 
     this.img = new Image();
-    this.img = "../img/dino-run.png";
+    this.img.src = "./assets/img/dino-run.png";
     this.img.frames = 4;
     this.img.frameIndex = 0;
+    this.checkCanvas();
   }
 
+  checkCanvas() {
+    console.log(
+      this.img,
+      (this.img.frameIndex * this.img.width) / this.img.frames,
+      0,
+      this.img.width / 4,
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    );
+  }
   onKeyEvent(event) {
     switch (event.keyCode) {
       case UP:
@@ -37,10 +51,10 @@ class Dino {
   }
 
   draw() {
-    this.img.drawCount++;
+    this.drawCount++;
 
-    if (this.img.drawCount >= 10) {
-      this.img.drawCount = 0;
+    if (this.drawCount >= 4) {
+      this.drawCount = 0;
       this.animate();
     }
 
@@ -76,12 +90,10 @@ class Dino {
   }
 
   animate() {
-    if (this.y === this.y0) {
-      this.img.frameIndex++;
+    this.img.frameIndex++;
 
-      if (this.img.frameIndex >= this.img.frames) {
-        this.img.frameIndex = 0;
-      }
+    if (this.img.frameIndex >= this.img.frames) {
+      this.img.frameIndex = 0;
     }
   }
 }

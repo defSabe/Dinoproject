@@ -2,10 +2,10 @@ class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.intervalId = null;
-    this.tick = 0; //what is this?
+    this.drawCount = 0; //what is this?
 
-    this.bg = new Background(ctx);
-    // this.dino = new Dino(ctx);
+    this.fl = new Floor(ctx);
+    this.dino = new Dino(ctx);
     // this.obstacles = [new Obstacle(this.ctx)];
 
     // this.score = new Score(ctx);
@@ -18,7 +18,7 @@ class Game {
       this.draw();
       //   this.checkCollisions();
       //   this.clearObstacles();
-      //   this.tick++
+      this.drawCount++;
     }, 1000 / 60);
   }
 
@@ -27,12 +27,12 @@ class Game {
   }
 
   draw() {
-    this.bg.draw();
+    this.fl.draw();
     this.dino.draw();
   }
 
   move() {
-    this.bg.move();
+    this.fl.move();
     this.dino.move();
   }
 

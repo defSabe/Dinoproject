@@ -1,10 +1,10 @@
-class Background {
+class Floor {
   constructor(ctx) {
     this.ctx = ctx;
     this.w = this.ctx.canvas.width;
-    this.h = this.ctx.canvas.height;
+    this.h = 10;
     this.x = 0;
-    this.y = 0;
+    this.y = 350;
 
     this.vx = -2;
 
