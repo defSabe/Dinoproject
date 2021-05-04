@@ -7,6 +7,7 @@ class Game {
     this.fl = new Floor(ctx);
     this.dino = new Dino(ctx);
     this.obstacles = [];
+    this.stars = [];
 
     this.score = new Score(ctx);
   }
@@ -18,9 +19,11 @@ class Game {
       this.draw();
       this.checkCollisions();
       this.clearObstacles();
+      this.clearStars();
       this.drawCount++;
       if (this.drawCount >= 100) {
         this.addObstacle();
+        this.addStar();
         this.drawCount = 0;
       }
       if (this.drawCount % 10 === 0) {
@@ -40,6 +43,17 @@ class Game {
     this.obstacles.push(cactus);
   }
 
+  clearStars() {
+    this.stars = this.stars.filter((s) => {
+      return s.x + s.w > 0;
+    });
+  }
+
+  addStar() {
+    const star = new Star(this.ctx, this.ctx.canvas.width, 290);
+    this.stars.push(star);
+  }
+
   clear() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
   }
@@ -50,6 +64,9 @@ class Game {
     this.obstacles.forEach((o) => {
       o.draw();
     });
+    this.stars.forEach((s) => {
+      s.draw();
+    });
     this.score.draw();
   }
 
@@ -58,6 +75,9 @@ class Game {
     this.dino.move();
     this.obstacles.forEach((o) => {
       o.move();
+    });
+    this.stars.forEach((s) => {
+      s.move();
     });
   }
 

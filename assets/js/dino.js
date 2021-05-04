@@ -44,7 +44,7 @@ class Dino {
     switch (event.keyCode) {
       case UP:
         if (!this.isJumping()) {
-          this.vy = -10;
+          this.vy = -12;
         }
         break;
     }
@@ -84,7 +84,7 @@ class Dino {
     this.y += this.vy;
 
     if (!this.isJumping()) {
-      this.vy = 0;
+      this.vy = 0.5;
       this.y = this.y0;
     }
   }
