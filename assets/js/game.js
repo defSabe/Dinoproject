@@ -115,5 +115,15 @@ class Game {
       this.ctx.canvas.width / 2,
       this.ctx.canvas.height / 2
     );
+    restart();
+  }
+
+  restart() {
+    let restart = document.querySelector(`.restart`);
+    restart.addEventListener("click", function (event) {
+      event.preventDefault();
+      ctx.clear();
+      ctx.start();
+    });
   }
 }

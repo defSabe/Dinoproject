@@ -6,6 +6,7 @@ canvas {
 
 #button-game-over {
   display: none;
+  background-image: url("./assets/img/restart.png");
 }
 
 /* 
