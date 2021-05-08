@@ -25,6 +25,8 @@ class Dino {
     this.img.frames = 4;
     this.img.frameIndex = 0;
     this.checkCanvas();
+
+    this.sound = new Audio("./assets/sounds/MaleJump.mp3");
   }
 
   checkCanvas() {
@@ -44,7 +46,8 @@ class Dino {
     switch (event.keyCode) {
       case UP:
         if (!this.isJumping()) {
-          this.vy = -12;
+          this.vy = -15;
+          this.sound.play();
         }
         break;
     }

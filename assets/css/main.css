@@ -1,5 +1,25 @@
 canvas {
-    border: 1px dotted;
+    border: 1px;
     margin-top: 100px;
     display: block;
   }
+
+#button-game-over {
+  display: none;
+}
+
+/* 
+#restart-button {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-image: url("./assets/img/restart.png");
+  background-size: cover;
+  z-index: 1;
+} */
+/* 
+#start-button:hover,
+#restart-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+} */

@@ -3,16 +3,18 @@ class Game {
     this.ctx = ctx;
     this.intervalId = null;
     this.drawCount = 0; //what is this?
-
+    this.buttonGO = document.getElementById("button-game-over");
     this.fl = new Floor(ctx);
     this.dino = new Dino(ctx);
     this.obstacles = [];
     this.stars = [];
-
+    this.sound = new Audio("./assets/sounds/Scream.mp3");
+    this.isStarted = false;
     this.score = new Score(ctx);
   }
 
   start() {
+    this.isStarted = true;
     this.intervalId = setInterval(() => {
       this.clear();
       this.move();
@@ -88,8 +90,8 @@ class Game {
   checkCollisions(obstacle) {
     const collision = this.obstacles.find((cactus) => {
       const colX =
-        this.dino.x + this.dino.w >= cactus.x &&
-        this.dino.x <= cactus.x + cactus.w;
+        this.dino.x + this.dino.w >= cactus.x * 1.05 &&
+        this.dino.x <= cactus.x + cactus.w * 1.05;
 
       const colY = this.dino.y + this.dino.h >= cactus.y;
 
@@ -98,13 +100,15 @@ class Game {
 
     if (collision) {
       this.gameOver();
+      this.sound.play();
     }
   }
 
   gameOver() {
     clearInterval(this.intervalId);
-
-    this.ctx.font = "40px serif";
+    // aqui pintare el botton
+    this.buttonGO.style.display = "block";
+    this.ctx.font = "40px consolas";
     this.ctx.textAlign = "center";
     this.ctx.fillText(
       "GAME OVER",

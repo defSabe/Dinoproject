@@ -1,15 +1,16 @@
-const ctx = document.getElementById("canvas").getContext("2d");
+window.onload = () => {
+  const ctx = document.getElementById("canvas").getContext("2d");
+  const intro = document.getElementById("game-intro");
+  const game = new Game(ctx);
 
-const game = new Game(ctx);
+  document.addEventListener("keyup", (event) => {
+    game.onKeyEvent(event);
+  });
 
-game.start();
-
-document.addEventListener("keyup", (event) => {
-  game.onKeyEvent(event);
-});
-
-// document.addEventListener('keypress', (event) => {
-//     if (!game.intervalId) {
-//         game.start();
-//     }
-// })
+  document.addEventListener("keypress", (event) => {
+    if (event.keyCode === UP && !game.isStarted) {
+      intro.remove();
+      game.start();
+    }
+  });
+};
