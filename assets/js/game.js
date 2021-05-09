@@ -11,6 +11,7 @@ class Game {
     this.sound = new Audio("./assets/sounds/Scream.mp3");
     this.isStarted = false;
     this.score = new Score(ctx);
+    this.mustReload = false;
   }
 
   start() {
@@ -104,9 +105,22 @@ class Game {
     }
   }
 
+  restart() {
+    this.intervalId = null;
+    this.drawCount = 0; //what is this?
+    this.obstacles = [];
+    this.stars = [];
+    this.isStarted = true;
+    this.score = new Score(this.ctx);
+    this.mustReload = false;
+    this.clear();
+    this.start();
+  }
+
   gameOver() {
-    clearInterval(this.intervalId);
     // aqui pintare el botton
+    clearInterval(this.intervalId);
+    this.mustReload = true;
     this.buttonGO.style.display = "block";
     this.ctx.font = "40px consolas";
     this.ctx.textAlign = "center";
@@ -115,15 +129,5 @@ class Game {
       this.ctx.canvas.width / 2,
       this.ctx.canvas.height / 2
     );
-    restart();
-  }
-
-  restart() {
-    let restart = document.querySelector(`.restart`);
-    restart.addEventListener("click", function (event) {
-      event.preventDefault();
-      ctx.clear();
-      ctx.start();
-    });
   }
 }
