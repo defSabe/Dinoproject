@@ -1,19 +1,23 @@
-class Star {
+class Bird {
   constructor(ctx) {
     this.ctx = ctx;
     this.drawCount = 0;
 
-    this.x = this.ctx.canvas.width; //valor de prueba
+    this.x = this.ctx.canvas.width;
     this.y = Math.random() * 250;
 
-    this.w = 15;
-    this.h = 15;
+    this.w = 50;
+    this.h = 40;
 
-    this.vx = -0.5;
+    this.vx = 0;
+    this.vy = 0;
+    this.ay = 0;
+    this.ax = 0;
+    this.g = 0.1;
 
     this.img = new Image();
-    this.img.src = "./assets/img/stars.png";
-    this.img.frames = 3;
+    this.img.src = "./assets/img/enemy-bird.png";
+    this.img.frames = 2;
     this.img.frameIndex = 0;
     this.checkCanvas();
   }
@@ -23,14 +27,15 @@ class Star {
       this.img,
       (this.img.frameIndex * this.img.height) / this.img.frames,
       0,
-      this.img.height / 3,
-      this.img.width,
+      this.img.width / 2,
+      this.img.height,
       this.x,
       this.y,
       this.w,
       this.h
     );
   }
+
   draw() {
     this.drawCount++;
 
@@ -39,21 +44,19 @@ class Star {
       this.animate();
     }
 
-    this.ctx.drawImage(
-      this.img,
-      (this.img.frameIndex * this.img.height) / this.img.frames,
-      0,
-      this.img.height / 3,
-      this.img.width,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    );
+    // this.ctx.drawImage(this.img, this.img.frameIndex);
+  }
+
+  isFloor() {
+    return this.y + this.h >= this.ctx.canvas.height;
   }
 
   move() {
-    this.x += this.vx;
+    this.vy += this.g;
+    // this.vy += this.ay;
+    // this.vx += this.ax;
+    // this.x += this.ax;
+    // this.y += this.vx;
   }
 
   animate() {

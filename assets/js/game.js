@@ -7,6 +7,7 @@ class Game {
     this.fl = new Floor(ctx);
     this.dino = new Dino(ctx);
     this.obstacles = [];
+    this.birds = [];
     this.stars = [];
     this.sound = new Audio("./assets/sounds/Scream.mp3");
     this.isStarted = false;
@@ -23,10 +24,12 @@ class Game {
       this.checkCollisions();
       this.clearObstacles();
       this.clearStars();
+      this.clearBirds();
       this.drawCount++;
       if (this.drawCount >= 100) {
         this.addObstacle();
         this.addStar();
+        this.addBird();
         this.drawCount = 0;
       }
       if (this.drawCount % 10 === 0) {
@@ -41,9 +44,20 @@ class Game {
     });
   }
 
+  clearBirds() {
+    this.birds = this.birds.filter((b) => {
+      return b.x + b.w > 0;
+    });
+  }
+
   addObstacle() {
     const cactus = new Cactus(this.ctx, this.ctx.canvas.width, 290);
     this.obstacles.push(cactus);
+  }
+
+  addBird() {
+    const bird = new Bird(this.ctx, this.ctx.canvas.width, 290);
+    this.birds.push(bird);
   }
 
   clearStars() {
@@ -70,6 +84,9 @@ class Game {
     this.stars.forEach((s) => {
       s.draw();
     });
+    this.birds.forEach((b) => {
+      b.draw();
+    });
     this.score.draw();
   }
 
@@ -81,6 +98,9 @@ class Game {
     });
     this.stars.forEach((s) => {
       s.move();
+    });
+    this.birds.forEach((b) => {
+      b.move();
     });
   }
 
@@ -107,9 +127,10 @@ class Game {
 
   restart() {
     this.intervalId = null;
-    this.drawCount = 0; //what is this?
+    this.drawCount = 0;
     this.obstacles = [];
     this.stars = [];
+    this.birds = [];
     this.isStarted = true;
     this.score = new Score(this.ctx);
     this.mustReload = false;
@@ -122,12 +143,12 @@ class Game {
     clearInterval(this.intervalId);
     this.mustReload = true;
     this.buttonGO.style.display = "block";
-    this.ctx.font = "40px consolas";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(
-      "GAME OVER",
-      this.ctx.canvas.width / 2,
-      this.ctx.canvas.height / 2
-    );
+    this.ctx.img = "./assets/img/game-over.png";
+    // this.ctx.font = "40px consolas";
+    // this.ctx.textAlign = "center";
+    // this.ctx.fillText(
+    //   "GAME OVER",
+    this.ctx.canvas.width / 2, this.ctx.canvas.height / 2;
+    // );
   }
 }

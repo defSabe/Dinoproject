@@ -14,7 +14,6 @@ window.onload = () => {
       intro.remove();
       game.start();
     } else if (event.keyCode === UP && game.mustReload) {
-      console.log("entro");
       game.restart();
     }
   });
