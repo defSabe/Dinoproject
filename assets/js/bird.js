@@ -44,7 +44,17 @@ class Bird {
       this.animate();
     }
 
-    // this.ctx.drawImage(this.img, this.img.frameIndex);
+    this.ctx.drawImage(
+      this.img,
+      (this.img.frameIndex * this.img.width) / this.img.frames,
+      0,
+      this.img.width / 2,
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    );
   }
 
   isFloor() {
