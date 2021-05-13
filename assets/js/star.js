@@ -1,10 +1,10 @@
 class Star {
-  constructor(ctx) {
+  constructor(ctx, x, y) {
     this.ctx = ctx;
     this.drawCount = 0;
 
-    this.x = this.ctx.canvas.width; //valor de prueba
-    this.y = Math.random() * 250;
+    this.x = x; //valor de prueba
+    this.y = y; //Math.random() * 250;
 
     this.w = 15;
     this.h = 15;

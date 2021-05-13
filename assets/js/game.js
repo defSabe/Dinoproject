@@ -56,7 +56,11 @@ class Game {
   }
 
   addBird() {
-    const bird = new Bird(this.ctx, this.ctx.canvas.width, 290);
+    const bird = new Bird(
+      this.ctx,
+      this.ctx.canvas.width + Math.random() * this.ctx.canvas.width,
+      90
+    );
     this.birds.push(bird);
   }
 
@@ -67,7 +71,11 @@ class Game {
   }
 
   addStar() {
-    const star = new Star(this.ctx, this.ctx.canvas.width, 290);
+    const star = new Star(
+      this.ctx,
+      this.ctx.canvas.width * Math.random(),
+      250 * Math.random()
+    );
     this.stars.push(star);
   }
 
@@ -139,16 +147,16 @@ class Game {
   }
 
   gameOver() {
-    // aqui pintare el botton
     clearInterval(this.intervalId);
     this.mustReload = true;
-    this.buttonGO.style.display = "block";
-    this.ctx.img = "./assets/img/game-over.png";
-    // this.ctx.font = "40px consolas";
-    // this.ctx.textAlign = "center";
-    // this.ctx.fillText(
-    //   "GAME OVER",
-    this.ctx.canvas.width / 2, this.ctx.canvas.height / 2;
-    // );
+    // this.buttonGO.style.display = "block";
+    // this.ctx.img.src = "./assets/img/game-over.png";
+    this.ctx.font = "40px consolas";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(
+      "GAME OVER",
+      this.ctx.canvas.width / 2,
+      this.ctx.canvas.height / 2
+    );
   }
 }

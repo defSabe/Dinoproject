@@ -1,16 +1,20 @@
 class Bird {
-  constructor(ctx) {
+  constructor(ctx, x, y) {
     this.ctx = ctx;
     this.drawCount = 0;
 
-    this.x = this.ctx.canvas.width;
-    this.y = Math.random() * 250;
+    this.x = x;
+    this.y = y;
+
+    // this.x = this.ctx.canvas.width;
+    // this.y = Math.random() * 250;
 
     this.w = 50;
     this.h = 40;
 
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = -3;
+    this.vy = 1;
+
     this.ay = 0;
     this.ax = 0;
     this.g = 0.1;
@@ -62,11 +66,11 @@ class Bird {
   }
 
   move() {
-    this.vy += this.g;
-    // this.vy += this.ay;
-    // this.vx += this.ax;
-    // this.x += this.ax;
-    // this.y += this.vx;
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.y >= 200 || this.y <= 100) {
+      this.vy *= -1;
+    }
   }
 
   animate() {
